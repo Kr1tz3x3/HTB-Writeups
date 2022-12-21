@@ -183,7 +183,7 @@ Important SUID files:
 - The interactive mode, available on versions 2.02 to 5.21, can be used to execute shell commands with root privileges due to owner being root
 - [GTFOBins]( https://gtfobins.github.io/gtfobins/nmap/)
 
-<img src="https://github.com/ChrisThePhotographer/test/blob/main/assets/Screen Shot 2022-12-19 at 11.20.34 PM.png" width=50% height=50%>
+<img src="https://github.com/Kr1tz3x3/HTB-Writeups/blob/main/assets/Screen Shot 2022-12-19 at 11.20.34 PM.png" width=50% height=50%>
 
 
 
