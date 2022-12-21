@@ -1,6 +1,6 @@
 # HTB Lame Writeup
 
-<code>#CVE-2004-2687</code> #CVE-2007-2447 #CVE-2011-2523 #vsFTPd #smbd #nmap
+<code>#CVE-2004-2687</code> <code>#CVE-2007-2447</code> <code>#CVE-2011-2523</code> <code>#vsFTPd</code> <code>#smbd</code> <code>#nmap</code>
 
 #### Reconnaissance
 
