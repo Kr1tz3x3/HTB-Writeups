@@ -56,7 +56,7 @@ Nmap done: 1 IP address (1 host up) scanned in 199.67 seconds
 
 ## Enumeration
 
-### Port 22 - File Transfer Protocol
+### Port 21 - File Transfer Protocol
 - Anonymous login using:
 	- ftp : ftp
 	- anonymous : anonymous
